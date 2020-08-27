@@ -9,8 +9,12 @@ services:
 # script:
 #     - docker run -e CI=true subhajit1985/docker-react-aws npm run test -- --coverage    
 
-script:
-    - ./mvnw clean install -B
+#script:
+#    - cp .travis.settings.xml $HOME/.m2/settings.xml
+#    - ./mvnw clean install -B
+    
+#before_install:
+#  - cp .travis.settings.xml $HOME/.m2/settings.xml    
     
 before_install:
     - docker build -t subhajit1985/docker-spring-boot-aws . 
