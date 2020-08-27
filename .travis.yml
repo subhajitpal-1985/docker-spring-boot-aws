@@ -18,7 +18,9 @@ services:
     
 before_install:
     - docker build -t subhajit1985/docker-spring-boot-aws . 
-       
+
+script:
+    - ./mvnw clean install -B       
 
 deploy: 
     provider : elasticbeanstalk
