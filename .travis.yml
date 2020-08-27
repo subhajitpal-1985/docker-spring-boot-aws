@@ -1,0 +1,28 @@
+language: java
+jdk: oraclejdk8
+sudo: required
+services: 
+    - docker    
+    
+    
+
+# script:
+#     - docker run -e CI=true subhajit1985/docker-react-aws npm run test -- --coverage    
+
+script:
+    - ./mvnw clean install -B
+    
+before_install:
+    - docker build -t subhajit1985/docker-spring-boot-aws .    
+
+deploy: 
+    provider : elasticbeanstalk
+    region: "eu-central-1"
+    app: "docker-spring-boot-aws"
+    env: "DockerSpringBootAws-env"
+    bucket_name: "elasticbeanstalk-eu-central-1-924742390700"
+    bucket_path: "docker-spring-boot-aws"
+    on: 
+       branch: master 
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
